@@ -28,10 +28,10 @@ class Login extends React.Component {
     const { email, senha } = this.state;
     const min = 6;
     const check = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-    if (check.test(email) === false && senha.length < min) {
-      this.setState({ disabledButton: true });
-    } else if (check.test(email) === true && senha.length >= min) {
+    if (check.test(email) === true && senha.length >= min) {
       this.setState({ disabledButton: false });
+    } else {
+      this.setState({ disabledButton: true });
     }
   }
 

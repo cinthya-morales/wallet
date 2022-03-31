@@ -3,7 +3,6 @@ import { SET_USER } from '../actions';
 
 const initialUserState = {
   email: '',
-  senha: '',
 };
 
 const reducerUser = (state = initialUserState, { type, data }) => {
