@@ -5,7 +5,7 @@ const initialUserState = {
   email: '',
 };
 
-const reducerUser = (state = initialUserState, { type, data }) => {
+const user = (state = initialUserState, { type, data }) => {
   switch (type) {
   case SET_USER:
     return { ...state, ...data };
@@ -14,4 +14,4 @@ const reducerUser = (state = initialUserState, { type, data }) => {
   }
 };
 
-export default reducerUser;
+export default user;
