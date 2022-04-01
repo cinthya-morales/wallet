@@ -1,24 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { fetchAPI } from '../actions';
+import Header from '../components/Header';
 
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { getCurrencies } = this.props;
+    getCurrencies();
+  }
+
   render() {
-    const { email } = this.props;
     return (
-      <header>
-        <span data-testid="email-field">{ email }</span>
-        <span data-testid="total-field"> Total: 0 </span>
-        <span data-testid="header-currency-field"> Câmbio: BRL </span>
-      </header>
+      <Header />
     );
   }
 }
 
-const mapStateToProps = ({ user }) => user;
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(fetchAPI()),
+});
+
+export default connect(null, mapDispatchToProps)(Wallet);
 
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
+  getCurrencies: propTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps)(Wallet);
