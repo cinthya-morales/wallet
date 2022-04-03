@@ -27,7 +27,7 @@ class Login extends React.Component {
   validationUser() {
     const { email, senha } = this.state;
     const min = 6;
-    const check = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+    const check = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/; // https://cursos.alura.com.br/forum/topico-como-validar-email-e-senha-em-javascript-80469
     if (check.test(email) === true && senha.length >= min) {
       this.setState({ disabledButton: false });
     } else {
