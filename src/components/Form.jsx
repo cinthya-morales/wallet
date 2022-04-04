@@ -1,27 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { fetchAPI } from '../actions';
+import { fetchAPI, fetchExchange } from '../actions';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // id: 0,
       value: 0,
       description: '',
       currency: 'USD',
+      // method: 'Dinheiro',
+      // tag: 'Alimentação',
     };
+    // this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
-    const { getCurrencies } = this.props;
+    const { getCurrencies, getExchange } = this.props;
     getCurrencies();
+    getExchange();
   }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
+
+  // updateState() {
+  //   this.setState({
+  // id: 0,
+  //     value: 0,
+  //     description: '',
+  //     currency: 'USD',
+  // method: 'Dinheiro',
+  // tag: 'Alimentação',
+  //   });
+  // }
 
   render() {
     const { currencies } = this.props;
@@ -54,7 +70,7 @@ class Form extends React.Component {
           <select
             id="Moeda"
             data-testid="currency-input"
-            name="Moeda"
+            name="currency"
             value={ currency }
             aria-label="Moeda"
             onChange={ this.handleChange }
@@ -66,11 +82,11 @@ class Form extends React.Component {
           </select>
         </label>
 
-        <label htmlFor="pagamento">
+        <label htmlFor="method">
           Método de pagamento:
           <select
             data-testid="method-input"
-            name="pagamento"
+            name="method"
             onChange={ this.handleChange }
           >
             <option value="dinheiro">Dinheiro</option>
@@ -93,6 +109,7 @@ class Form extends React.Component {
             <option value="saude">Saúde</option>
           </select>
         </label>
+        <button type="button" onClick={ this.updateState }>Adicionar despesa</button>
       </form>
     );
   }
@@ -100,10 +117,12 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(fetchAPI()),
+  getExchange: () => dispatch(fetchExchange()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
@@ -111,4 +130,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Form);
 Form.propTypes = {
   currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
   getCurrencies: propTypes.func.isRequired,
+  getExchange: propTypes.func.isRequired,
 };
