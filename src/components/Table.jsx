@@ -4,7 +4,8 @@ class Table extends React.Component {
   render() {
     return (
       <table>
-        <tr border="1">
+        <style>{'table, th{border:1px solid black;}'}</style>
+        <tr>
           <th>Descrição </th>
           <th>Tag </th>
           <th>Método de pagamento </th>

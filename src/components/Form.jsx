@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { fetchAPI, fetchExchange } from '../actions';
+import { fetchAPI } from '../actions';
 
 class Form extends React.Component {
   constructor(props) {
@@ -10,34 +10,23 @@ class Form extends React.Component {
       // id: 0,
       value: 0,
       description: '',
-      currency: 'USD',
-      // method: 'Dinheiro',
-      // tag: 'Alimentação',
+      currency: '',
+      // method: '',
+      // tag: '',
+      // exchangeRates: {},
     };
-    // this.updateState = this.updateState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    const { getCurrencies, getExchange } = this.props;
+    const { getCurrencies } = this.props;
     getCurrencies();
-    getExchange();
   }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
-
-  // updateState() {
-  //   this.setState({
-  // id: 0,
-  //     value: 0,
-  //     description: '',
-  //     currency: 'USD',
-  // method: 'Dinheiro',
-  // tag: 'Alimentação',
-  //   });
-  // }
 
   render() {
     const { currencies } = this.props;
@@ -122,7 +111,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(fetchAPI()),
-  getExchange: () => dispatch(fetchExchange()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
@@ -130,5 +118,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(Form);
 Form.propTypes = {
   currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
   getCurrencies: propTypes.func.isRequired,
-  getExchange: propTypes.func.isRequired,
 };
