@@ -24,7 +24,8 @@ class Form extends React.Component {
   }
 
   handleChange = ({ target }) => {
-    const { name, value } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
     this.setState({ [name]: value });
   }
 
@@ -42,7 +43,7 @@ class Form extends React.Component {
     this.setState({
       id: id + 1,
       value: 0,
-      description: 'besteira',
+      description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
