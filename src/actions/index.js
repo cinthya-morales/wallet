@@ -4,6 +4,7 @@ export const SET_WALLET = 'SET_WALLET';
 export const REQUEST_API = 'REQUEST_API';
 export const GET_EXCHANGE = 'GET_EXCHANGE';
 export const SAVE_STATE = 'SAVE_STATE';
+export const TOTAL_EXPENSES = 'TOTAL_EXPENSES';
 
 // Para dados do usuário na pages/Login:
 export const setUser = (data) => ({ type: SET_USER, data });
@@ -30,3 +31,6 @@ export function fetchAPI() {
 
 // Action para salvar state no estado global:
 export const saveState = (data) => ({ type: SAVE_STATE, data });
+
+// Para atualizar o Header com o valor atualizado do total
+export const totalExpenses = (data) => ({ type: TOTAL_EXPENSES, data });

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from './Header';
-import { fetchAPI, saveState } from '../actions';
+import { fetchAPI, saveState, totalExpenses } from '../actions';
 
 class Form extends React.Component {
   constructor(props) {
@@ -31,15 +31,13 @@ class Form extends React.Component {
 
   async handleClick() {
     const { id } = this.state;
-    const { updateState } = this.props;
+    const { updateState, getTotalExpense } = this.props;
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const exchangeRates = await response.json();
     updateState({
       ...this.state,
       exchangeRates,
     });
-    console.log('oioi');
-    console.log(this.state);
     this.setState({
       id: id + 1,
       value: 0,
@@ -47,7 +45,7 @@ class Form extends React.Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-    });
+    }, () => getTotalExpense());
   }
 
   render() {
@@ -141,6 +139,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(fetchAPI()),
   updateState: (state) => dispatch(saveState(state)),
+  getTotalExpense: () => dispatch(totalExpenses()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
@@ -149,5 +148,6 @@ Form.propTypes = {
   currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
   getCurrencies: propTypes.func.isRequired,
   updateState: propTypes.func.isRequired,
+  getTotalExpense: propTypes.func.isRequired,
   // expenses: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
 };
