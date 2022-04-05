@@ -21,24 +21,7 @@ export function fetchAPI() {
       const data = await response.json();
       const currencies = (Object.keys(data)).filter((currencie) => currencie !== 'USDT');
       // currencies.splice(1, 1); // https://www.horadecodar.com.br/2020/01/28/javascript-como-remover-um-elemento-de-um-array/
-      console.log(data);
       dispatch(setWallet(currencies));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export const getExchange = (data) => ({ type: GET_EXCHANGE, data });
-
-// Para requisição dos dados das moedas para exchangeRates:
-export function fetchExchange() {
-  return async (dispatch) => {
-    try {
-      dispatch(requestAPI());
-      const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-      const data = await response.json();
-      dispatch(getExchange(data));
     } catch (error) {
       console.log(error);
     }

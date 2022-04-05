@@ -11,9 +11,8 @@ const wallet = (state = initialWalletState, { type, data }) => {
   case SET_WALLET:
     return { ...state, currencies: data };
   case SAVE_STATE:
-    return { ...state, expenses: [data] };
-  // case GET_EXCHANGE:
-  //   return { ...state, expenses: data };
+    state.expenses.push(data);
+    return state;
   default:
     return state;
   }
