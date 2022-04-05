@@ -50,7 +50,6 @@ class Form extends React.Component {
 
   render() {
     const { currencies } = this.props;
-    // console.log(expenses);
     const { value, description, currency, method } = this.state;
     return (
       <div>
@@ -133,7 +132,6 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -149,5 +147,4 @@ Form.propTypes = {
   getCurrencies: propTypes.func.isRequired,
   updateState: propTypes.func.isRequired,
   getTotalExpense: propTypes.func.isRequired,
-  // expenses: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
 };
