@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import Header from './Header';
 import { fetchAPI, saveState, totalExpenses } from '../actions';
 
 class Form extends React.Component {
@@ -49,11 +48,11 @@ class Form extends React.Component {
   }
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, expenses } = this.props;
     const { value, description, currency, method } = this.state;
     return (
       <div>
-        <Header />
+
         <form>
           <label htmlFor="value">
             Valor:
@@ -125,6 +124,46 @@ class Form extends React.Component {
           </label>
           <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
         </form>
+
+        <table>
+          <thead>
+            <style>{'table, th{border:1px solid black;}'}</style>
+            <tr>
+              <th>Descrição </th>
+              <th>Tag </th>
+              <th>Método de pagamento </th>
+              <th>Valor </th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado </th>
+              <th>Valor convertido </th>
+              <th>Moeda de conversão </th>
+              <th>Editar/Excluir</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {expenses
+          && expenses
+            .map((item) => (
+              <tr key={ item.id }>
+                <td>{item.description}</td>
+                <td>{item.tag}</td>
+                <td>{item.method}</td>
+                <td>{Number(item.value).toFixed(2)}</td>
+                <td>{item.exchangeRates[item.currency].name}</td>
+                <td>{Number(item.exchangeRates[item.currency].ask).toFixed(2)}</td>
+                <td>
+                  {(Number(item.value) * Number(item.exchangeRates[item.currency].ask))
+                    .toFixed(2)}
+                </td>
+                <td>Real</td>
+                <td>
+                  <button type="button" data-testid="edit-btn">Editar</button>
+                  <button type="button" data-testid="delete-btn">Excluir</button>
+                </td>
+              </tr>))}
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -132,6 +171,7 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -143,8 +183,9 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
-  currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+  currencies: propTypes.arrayOf({}).isRequired,
   getCurrencies: propTypes.func.isRequired,
   updateState: propTypes.func.isRequired,
   getTotalExpense: propTypes.func.isRequired,
+  expenses: propTypes.arrayOf({}).isRequired,
 };
