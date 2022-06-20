@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { setUser } from '../actions';
+import { Button, Input, Form, GlobalStyle, Wrapper, Title, H2 } from '../styles';
 
 class Login extends React.Component {
   constructor(props) {
@@ -38,36 +39,42 @@ class Login extends React.Component {
   render() {
     const { disabledButton, email, senha } = this.state;
     return (
-      <form>
-        <label htmlFor="email">
-          <input
-            placeholder="Email"
-            data-testid="email-input"
-            type="text"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="email">
-          <input
-            placeholder="Senha"
-            data-testid="password-input"
-            type="password"
-            name="senha"
-            value={ senha }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <Link to="/carteira">
-          <input
-            data-testid="login-submit-button"
-            type="button"
-            value="Entrar"
-            disabled={ disabledButton }
-          />
-        </Link>
-      </form>
+      <>
+        <GlobalStyle />
+        <Wrapper>
+          <Form>
+            <Title>Trybe Wallet</Title>
+            <H2>Login</H2>
+            <Input
+              placeholder="Email"
+              data-testid="email-input"
+              type="text"
+              name="email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+
+            <Input
+              placeholder="Senha"
+              data-testid="password-input"
+              type="password"
+              name="senha"
+              value={ senha }
+              onChange={ this.handleChange }
+            />
+
+            <Link to="/carteira">
+              <Button
+                data-testid="login-submit-button"
+                disabled={ disabledButton }
+              >
+                Entrar
+              </Button>
+            </Link>
+
+          </Form>
+        </Wrapper>
+      </>
     );
   }
 }

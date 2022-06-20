@@ -7,8 +7,12 @@ class Header extends React.Component {
     const { email, expensesTotal } = this.props;
     return (
       <header>
-        <span data-testid="email-field">{ email }</span>
-        <span data-testid="total-field">{expensesTotal || 0}</span>
+        <div data-testid="email-field">{ email }</div>
+        <div data-testid="total-field">
+          Despesa:
+          {' '}
+          { expensesTotal || 0}
+        </div>
         <span data-testid="header-currency-field"> Câmbio: BRL </span>
       </header>
     );
