@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { setUser } from '../actions';
-import { Button, Input, Form, GlobalStyle, Wrapper, Title, H2 } from '../styles';
+import { Button, Input, Form, GlobalStyle, Wrapper, Title, H2 }
+from '../styles/loginStyles';
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Login extends React.Component {
         <GlobalStyle />
         <Wrapper>
           <Form>
-            <Title>Trybe Wallet</Title>
+            <Title>Wallet</Title>
             <H2>Login</H2>
             <Input
               placeholder="Email"

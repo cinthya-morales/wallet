@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { fetchAPI, saveState, totalExpenses } from '../actions';
+import { FormStyle, DeleteW, EditW, Td, Th, ButtonAdd } from '../styles/walletStyles';
 
 class Form extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class Form extends React.Component {
     return (
       <div>
 
-        <form>
+        <FormStyle>
           <label htmlFor="value">
             Valor:
             <input
@@ -122,22 +123,21 @@ class Form extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
-        </form>
+          <ButtonAdd type="button" onClick={ this.handleClick }>Adicionar</ButtonAdd>
+        </FormStyle>
 
         <table>
           <thead>
-            <style>{'table, th{border:1px solid black;}'}</style>
             <tr>
-              <th>Descrição </th>
-              <th>Tag </th>
-              <th>Método de pagamento </th>
-              <th>Valor </th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado </th>
-              <th>Valor convertido </th>
-              <th>Moeda de conversão </th>
-              <th>Editar/Excluir</th>
+              <Th>Descrição </Th>
+              <Th>Tag </Th>
+              <Th>Método de pagamento </Th>
+              <Th>Valor </Th>
+              <Th>Moeda</Th>
+              <Th>Câmbio utilizado </Th>
+              <Th>Valor convertido </Th>
+              <Th>Moeda de conversão </Th>
+              <Th>Editar/Excluir</Th>
             </tr>
           </thead>
 
@@ -146,21 +146,21 @@ class Form extends React.Component {
           && expenses
             .map((item) => (
               <tr key={ item.id }>
-                <td>{item.description}</td>
-                <td>{item.tag}</td>
-                <td>{item.method}</td>
-                <td>{Number(item.value).toFixed(2)}</td>
-                <td>{item.exchangeRates[item.currency].name}</td>
-                <td>{Number(item.exchangeRates[item.currency].ask).toFixed(2)}</td>
-                <td>
+                <Td>{item.description}</Td>
+                <Td>{item.tag}</Td>
+                <Td>{item.method}</Td>
+                <Td>{Number(item.value).toFixed(2)}</Td>
+                <Td>{item.exchangeRates[item.currency].name}</Td>
+                <Td>{Number(item.exchangeRates[item.currency].ask).toFixed(2)}</Td>
+                <Td>
                   {(Number(item.value) * Number(item.exchangeRates[item.currency].ask))
                     .toFixed(2)}
-                </td>
-                <td>Real</td>
-                <td>
-                  <button type="button" data-testid="edit-btn">Editar</button>
-                  <button type="button" data-testid="delete-btn">Excluir</button>
-                </td>
+                </Td>
+                <Td>Real</Td>
+                <Td>
+                  <EditW data-testid="edit-btn" />
+                  <DeleteW data-testid="delete-btn" />
+                </Td>
               </tr>))}
           </tbody>
         </table>

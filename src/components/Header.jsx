@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { HeaderW, MoneyIcon } from '../styles/walletStyles';
 
 class Header extends React.Component {
   render() {
     const { email, expensesTotal } = this.props;
     return (
       <header>
-        <div data-testid="email-field">{ email }</div>
-        <div data-testid="total-field">
+        <MoneyIcon />
+        <HeaderW data-testid="email-field">{ email }</HeaderW>
+        <HeaderW data-testid="total-field">
           Despesa:
           {' '}
           { expensesTotal || 0}
-        </div>
-        <span data-testid="header-currency-field"> Câmbio: BRL </span>
+        </HeaderW>
+        <HeaderW data-testid="header-currency-field"> Câmbio: BRL </HeaderW>
       </header>
     );
   }
