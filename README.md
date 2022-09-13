@@ -21,3 +21,12 @@ Projeto realizado com objetivo de:
 ## Executando
 
     npm start
+    
+  ### Página de login 
+ <img src="https://github.com/cinthya-morales/wallet/blob/cinthya-trybe-wallet/src/images/loginPage.png">
+ 
+ ### Página da carteira
+ <img src="https://github.com/cinthya-morales/wallet/blob/cinthya-trybe-wallet/src/images/walletEmpty.png">
+ 
+ ### Página da carteira com gastos 
+ <img src="https://github.com/cinthya-morales/wallet/blob/cinthya-trybe-wallet/src/images/walletPage.png">
